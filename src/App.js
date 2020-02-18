@@ -3,6 +3,7 @@ import ClimbsContainer from "./ClimbsContainer";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import NavContainer from "./NavContainer";
+import SidebarContainer from "./SidebarContainer";
 //can add redirect above if needed
 import "./App.css";
 
@@ -24,8 +25,9 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter history basename="/">
+          <NavContainer />
+          <SidebarContainer />
           <Switch>
-            <NavContainer />
             <Route exact path="/" render={props => <ClimbsContainer />} />
           </Switch>
         </BrowserRouter>
