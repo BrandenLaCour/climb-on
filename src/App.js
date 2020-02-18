@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import ClimbsContainer from "./ClimbsContainer";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Switch } from "react-router";
+import NavContainer from "./NavContainer";
+//can add redirect above if needed
 import "./App.css";
 
 class App extends Component {
@@ -19,7 +23,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ClimbsContainer />
+        <BrowserRouter history basename="/">
+          <Switch>
+            <NavContainer />
+            <Route exact path="/" render={props => <ClimbsContainer />} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

@@ -1,0 +1,19 @@
+ul {
+  display: inline;
+}
+
+.item {
+  width: 5vw;
+}
+
+.space {
+  width: 35vw;
+}
+
+.search {
+  width: 10vw;
+}
+
+.space-2 {
+  width: 40vw;
+}
