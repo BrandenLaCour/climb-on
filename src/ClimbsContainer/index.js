@@ -1,4 +1,5 @@
 import React from "react";
+import ClimbList from "./ClimbsList";
 
 class ClimbsContainer extends React.Component {
   constructor() {
@@ -17,7 +18,7 @@ class ClimbsContainer extends React.Component {
   }
 
   render() {
-    return <p>Test</p>;
+    return <ClimbList climbs={this.state.climbs} />;
   }
 }
 
