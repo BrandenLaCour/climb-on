@@ -4,6 +4,7 @@ import { BrowserRouter, Link } from "react-router-dom";
 import { Route, Switch } from "react-router";
 //can add redirect above if needed
 import NavContainer from "./NavContainer";
+import AuthForm from "./AuthContainer/AuthForm";
 // import SidebarContainer from "./SidebarContainer";
 import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import "./App.css";
@@ -13,7 +14,8 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      username: ""
+      username: "brandenlacour@gma",
+      page: ""
     };
   }
   // {
@@ -22,10 +24,48 @@ class App extends Component {
   //   "password": "1234",
   //   "city": "chicago"
   // }
+
+  handlePageChoice = page => {
+    this.setState({ page: page });
+  };
+
+  register = async userInfo => {
+    const registerResponse = await fetch(
+      process.env.REACT_APP_API_URI + "/api/v1/users/register",
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(userInfo),
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
+    const { data } = await registerResponse.json();
+    this.setState({ username: data.username });
+  };
+
+  login = async userInfo => {
+    const loginResponse = await fetch(
+      process.env.REACT_APP_API_URI + "/api/v1/users/login",
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(userInfo),
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
+    const { data } = await loginResponse.json();
+
+    this.setState({ username: data.username });
+  };
+
   render() {
     return (
       <div>
-        <BrowserRouter history basename="/">
+        <BrowserRouter>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
               as={Menu}
@@ -35,32 +75,38 @@ class App extends Component {
               vertical
               visible
             >
-              <Link to="/">
-                <Menu.Item as="a">
+              <Link onClick={() => this.handlePageChoice("home")} to="/">
+                <Menu.Item>
                   <Icon name="home" />
                   Home
                 </Menu.Item>
               </Link>
-              <Link to="/login">
-                <Menu.Item as="a">
+              <Link onClick={() => this.handlePageChoice("login")} to="login">
+                <Menu.Item>
                   <Icon name="sign-in" />
                   Login
                 </Menu.Item>
               </Link>
-              <Link to="/logout">
-                <Menu.Item as="a">
+              <Link
+                onClick={() => this.handlePageChoice("logout")}
+                to="/logout"
+              >
+                <Menu.Item>
                   <Icon name="sign-out" />
                   Log Out
                 </Menu.Item>
               </Link>
-              <Link to="myClimbs">
-                <Menu.Item as="a">
+              <Link
+                onClick={() => this.handlePageChoice("myClimbs")}
+                to="myClimbs"
+              >
+                <Menu.Item>
                   <Icon name="chart line" />
                   My Climbs
                 </Menu.Item>
               </Link>
-              <Link to="/Users">
-                <Menu.Item as="a">
+              <Link onClick={() => this.handlePageChoice("users")} to="/Users">
+                <Menu.Item>
                   <Icon name="address book outline" />
                   Users
                 </Menu.Item>
@@ -68,11 +114,32 @@ class App extends Component {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <Segment content>
-                <NavContainer />
+              <Segment
+                style={
+                  this.state.page !== ("home" || "users" || "my climbs")
+                    ? { height: "100vh" }
+                    : { height: "100%" }
+                }
+              >
+                <NavContainer
+                  username={this.state.username}
+                  handlePageChoice={this.handlePageChoice}
+                />
 
                 <Switch>
                   <Route exact path="/" render={props => <ClimbsContainer />} />
+                  <Route
+                    exact
+                    path="/login"
+                    render={props => (
+                      <AuthForm
+                        handlePageChoice={this.handlePageChoice}
+                        formType={this.state.page}
+                        register={this.register}
+                        login={this.login}
+                      />
+                    )}
+                  />
                 </Switch>
               </Segment>
             </Sidebar.Pusher>

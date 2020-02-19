@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { pagination, Button } from "semantic-ui-react";
 import "./index.css";
 
-const NavContainer = () => {
+const NavContainer = props => {
   return (
     <div
       aria-label="Pagination Navigation"
@@ -15,52 +14,68 @@ const NavContainer = () => {
       <Link
         aria-current="false"
         aria-disabled="false"
-        tabindex="0"
-        value="1"
         aria-label="First item"
         type="firstItem"
         className="item"
+        onClick={() => props.handlePageChoice("home")}
         to="/"
       >
         <strong>ClimbOn</strong>
       </Link>
-      <div className="space-2" aria-current="true" aria-disabled="false"></div>{" "}
+      <div
+        className={props.username.length > 8 ? `space-2-large` : "space-2"}
+        aria-current="true"
+        aria-disabled="false"
+      ></div>{" "}
       <input
         aria-current="false"
         aria-disabled="false"
-        tabindex="0"
-        value=""
         aria-label="First item"
         type="firstItem"
         className="search item"
         placeholder="Enter Climb"
       />
       {/* above will eventually need its own component for search */}
-      <div className="space" aria-current="true" aria-disabled="false"></div>
-      <Link
-        aria-current="false"
+      <div
+        className={props.username.length > 8 ? `space-large` : "space"}
+        aria-current="true"
         aria-disabled="false"
-        tabindex="0"
-        value="1"
-        aria-label="First item"
-        type="firstItem"
-        className="item"
-        to="/addClimb"
-      >
-        Add Climb
-      </Link>
-      <Link
-        aria-current="false"
-        aria-disabled="false"
-        tabindex="0"
-        value="1"
-        aria-label="First item"
-        type="firstItem"
-        className="item"
-        to="/profile"
-      >
-        Profile
-      </Link>
+      ></div>
+      {props.username ? (
+        <>
+          <Link
+            aria-current="false"
+            aria-disabled="false"
+            aria-label="pageItem"
+            type="firstItem"
+            className={`item ${
+              props.username.length > 12 ? "user-link-large" : "user-link"
+            }`}
+            to="/profile"
+            onClick={() => props.handlePageChoice("profile")}
+          >
+            {props.username}
+          </Link>
+
+          <Link
+            aria-current="false"
+            aria-disabled="false"
+            aria-label="First item"
+            type="firstItem"
+            className="item"
+            to="/addClimb"
+            onClick={() => props.handlePageChoice("addClimb")}
+          >
+            Add Climb
+          </Link>
+        </>
+      ) : (
+        <div
+          className="space-3"
+          aria-current="true"
+          aria-disabled="false"
+        ></div>
+      )}
     </div>
   );
 };

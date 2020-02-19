@@ -6,9 +6,9 @@ const ClimbCard = props => {
   for (let i = 0; i < props.climb.rating; i++) {
     stars.push("star");
   }
-  console.log(stars);
+
   return (
-    <>
+    <React.Fragment>
       <Card style={{ width: "400px" }}>
         <Image src={props.climb.picture} wrapped ui={false} />
         <Card.Content>
@@ -31,7 +31,7 @@ const ClimbCard = props => {
           </Card.Meta>
         </Card.Content>
       </Card>
-    </>
+    </React.Fragment>
   );
 };
 

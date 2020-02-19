@@ -7,7 +7,11 @@ const ClimbList = props => {
     <div className="content-container">
       <div className="content">
         {props.climbs.map(climb => {
-          return <ClimbCard climb={climb} />;
+          return (
+            <React.Fragment key={climb.id}>
+              <ClimbCard id={climb.id} climb={climb} />
+            </React.Fragment>
+          );
         })}
       </div>
     </div>

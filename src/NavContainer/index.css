@@ -5,9 +5,20 @@ ul {
 .item {
   width: 5vw;
 }
+.user-link {
+  width: 6vw;
+}
+
+.user-link-large {
+  width: 10vw;
+}
 
 .space {
-  width: 32vw;
+  width: 34vw;
+}
+
+.space-large {
+  width: 29vw;
 }
 
 .search {
@@ -15,10 +26,18 @@ ul {
 }
 
 .space-2 {
-  width: 37vw;
+  width: 34vw;
+}
+
+.space-2-large {
+  width: 35vw;
 }
 
 #navbar {
   margin-top: -15px;
   margin-left: 70px;
+}
+
+.space-3 {
+  width: 100px;
 }
