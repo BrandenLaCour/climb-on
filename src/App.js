@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router";
 //can add redirect above if needed
 import NavContainer from "./NavContainer";
 import AuthForm from "./AuthContainer/AuthForm";
+import ClimbForm from "./ClimbsContainer/ClimbForm";
 // import SidebarContainer from "./SidebarContainer";
 import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import "./App.css";
@@ -60,6 +61,22 @@ class App extends Component {
     const { data } = await loginResponse.json();
 
     this.setState({ username: data.username });
+  };
+
+  createClimb = async climbInfo => {
+    const createdResponse = await fetch(
+      process.env.REACT_APP_API_URI + "/api/v1/climbs/",
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(climbInfo),
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
+    const createdJson = await createdResponse.json();
+    console.log(createdJson);
   };
 
   render() {
@@ -128,6 +145,17 @@ class App extends Component {
 
                 <Switch>
                   <Route exact path="/" render={props => <ClimbsContainer />} />
+                  <Route
+                    exact
+                    path="/addClimb"
+                    render={props => (
+                      <ClimbForm
+                        createClimb={this.createClimb}
+                        updateClimb={this.updateClimb}
+                        formType={this.state.page}
+                      />
+                    )}
+                  />
                   <Route
                     exact
                     path="/login"
