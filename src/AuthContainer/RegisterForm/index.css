@@ -1,0 +1,18 @@
+.form {
+  width: 20vw;
+  padding: 10px;
+  margin-top: 60px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+}
+.submit {
+  display: flex;
+  justify-content: center;
+}
