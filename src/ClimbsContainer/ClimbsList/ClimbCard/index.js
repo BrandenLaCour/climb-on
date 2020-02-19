@@ -17,10 +17,6 @@ const ClimbCard = props => {
             {props.climb.name} | {props.climb.grade}
           </Card.Header>
           <Card.Meta>{props.climb.date}</Card.Meta>
-          <Card.Description>
-            {props.climb.thoughts.slice(0, 65)}
-          </Card.Description>
-          <Card.Meta>{props.climb.user.username}</Card.Meta>
         </Card.Content>
         <Card.Content>
           <Card.Meta>
@@ -30,11 +26,10 @@ const ClimbCard = props => {
               return <Icon name={star} color="blue" />;
             })}
           </Card.Meta>
-          <Card.Meta>
-            <Link onClick={() => props.showClimb(props.climb)} to="/showClimb">
-              More Info
-            </Link>
-          </Card.Meta>
+
+          <Link onClick={() => props.showClimb(props.climb)} to="/showClimb">
+            More Info
+          </Link>
         </Card.Content>
       </Card>
     </React.Fragment>
