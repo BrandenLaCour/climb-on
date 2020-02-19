@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Image, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const ClimbCard = props => {
   const stars = [];
@@ -28,6 +29,11 @@ const ClimbCard = props => {
             {stars.map(star => {
               return <Icon name={star} color="blue" />;
             })}
+          </Card.Meta>
+          <Card.Meta>
+            <Link onClick={() => props.showClimb(props.climb)} to="/showClimb">
+              More Info
+            </Link>
           </Card.Meta>
         </Card.Content>
       </Card>

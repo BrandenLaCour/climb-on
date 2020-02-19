@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ClimbsContainer from "./ClimbsContainer";
 import { BrowserRouter, Link } from "react-router-dom";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
 //can add redirect above if needed
 import NavContainer from "./NavContainer";
 import AuthForm from "./AuthContainer/AuthForm";
 import ClimbForm from "./ClimbsContainer/ClimbForm";
+import ShowClimb from "./ClimbsContainer/ShowClimb";
 // import SidebarContainer from "./SidebarContainer";
 import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import "./App.css";
@@ -16,9 +17,9 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: "brandenlacour@gma",
-      page: "",
+      page: "home",
       climbToBeEdited: -1,
-      climbToEdit: {}
+      climb: null
     };
   }
   // {
@@ -95,7 +96,9 @@ class App extends Component {
     const updatedJson = await updatedResponse.json();
   };
 
-  edit = () => {};
+  showClimb = async climbInfo => {
+    this.setState({ climb: climbInfo });
+  };
 
   render() {
     return (
@@ -131,6 +134,7 @@ class App extends Component {
                   Log Out
                 </Menu.Item>
               </Link>
+
               <Link
                 onClick={() => this.handlePageChoice("myClimbs")}
                 to="myClimbs"
@@ -162,7 +166,25 @@ class App extends Component {
                 />
 
                 <Switch>
-                  <Route exact path="/" render={props => <ClimbsContainer />} />
+                  <Route
+                    exact
+                    path="/"
+                    render={props => (
+                      <ClimbsContainer
+                        showClimb={this.showClimb}
+                        page={this.state.page}
+                      />
+                    )}
+                  />
+                  {this.state.climb !== null ? (
+                    <Route
+                      exact
+                      path="/showClimb"
+                      render={props => <ShowClimb climb={this.state.climb} />}
+                    />
+                  ) : (
+                    <Redirect to="/" />
+                  )}
                   <Route
                     exact
                     path="/addClimb"
