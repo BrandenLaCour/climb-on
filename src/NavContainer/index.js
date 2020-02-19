@@ -9,6 +9,7 @@ const NavContainer = () => {
       aria-label="Pagination Navigation"
       role="navigation"
       className="ui pagination menu"
+      id="navbar"
     >
       {" "}
       <Link

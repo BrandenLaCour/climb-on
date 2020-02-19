@@ -9,7 +9,7 @@ const ClimbCard = props => {
   console.log(stars);
   return (
     <>
-      <Card>
+      <Card style={{ width: "400px" }}>
         <Image src={props.climb.picture} wrapped ui={false} />
         <Card.Content>
           <Card.Header>

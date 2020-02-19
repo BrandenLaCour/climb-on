@@ -7,7 +7,7 @@ ul {
 }
 
 .space {
-  width: 35vw;
+  width: 32vw;
 }
 
 .search {
@@ -15,5 +15,10 @@ ul {
 }
 
 .space-2 {
-  width: 40vw;
+  width: 37vw;
+}
+
+#navbar {
+  margin-top: -15px;
+  margin-left: 70px;
 }
