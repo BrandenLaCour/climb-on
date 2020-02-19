@@ -1,0 +1,30 @@
+.form {
+  width: 20vw;
+  padding: 10px;
+  margin-top: 60px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+}
+.submit {
+  display: flex;
+  justify-content: center;
+}
+
+.form-subtitle {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
