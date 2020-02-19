@@ -16,7 +16,7 @@ class AuthForm extends React.Component {
     };
   }
 
-  onChange = event => {
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -30,13 +30,6 @@ class AuthForm extends React.Component {
     }
   };
   render() {
-    const ratingOptions = [
-      { key: 1, value: 1, text: 1 },
-      { key: 2, value: 2, text: 2 },
-      { key: 3, value: 3, text: 3 },
-      { key: 4, value: 4, text: 4 },
-      { key: 5, value: 5, text: 5 }
-    ];
     console.log(this.state);
     return (
       <>
@@ -56,7 +49,7 @@ class AuthForm extends React.Component {
                   <input
                     name="name"
                     value={this.state.name}
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     placeholder="enter climb name"
                   />
                 </Form.Field>
@@ -65,7 +58,7 @@ class AuthForm extends React.Component {
                   <input
                     name="grade"
                     value={this.state.grade}
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     placeholder="enter climb grade"
                   />
                 </Form.Field>
@@ -75,7 +68,7 @@ class AuthForm extends React.Component {
                   <input
                     name="location"
                     value={this.state.location}
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     placeholder="enter location"
                   />
                 </Form.Field>
@@ -84,7 +77,7 @@ class AuthForm extends React.Component {
                   <input
                     name="thoughts"
                     value={this.state.thoughts}
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     placeholder="enter thoughts"
                   />
                 </Form.Field>
@@ -93,19 +86,24 @@ class AuthForm extends React.Component {
                   <input
                     name="picture"
                     value={this.state.picture}
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     placeholder="enter picture url"
                   />
                 </Form.Field>
                 <Form.Field>
                   <label>Rating</label>
-                  <Select
-                    placeholder="Rate The Climb"
+
+                  <select
                     name="rating"
                     value={this.state.value}
-                    onChange={this.onChange}
-                    options={ratingOptions}
-                  />
+                    onChange={this.handleChange}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
                 </Form.Field>
                 <Form.Field>
                   <label>Date Climbed</label>
@@ -113,7 +111,7 @@ class AuthForm extends React.Component {
                     name="date"
                     type="date"
                     value={this.state.date}
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     placeholder="enter date"
                   />
                 </Form.Field>

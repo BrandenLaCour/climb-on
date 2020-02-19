@@ -16,7 +16,9 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: "brandenlacour@gma",
-      page: ""
+      page: "",
+      climbToBeEdited: -1,
+      climbToEdit: {}
     };
   }
   // {
@@ -76,8 +78,24 @@ class App extends Component {
       }
     );
     const createdJson = await createdResponse.json();
-    console.log(createdJson);
   };
+
+  updateClimb = async climbInfo => {
+    const updatedResponse = await fetch(
+      process.env.REACT_APP_API_URI + "/api/v1/climbs/",
+      {
+        credentials: "include",
+        method: "PUT",
+        body: JSON.stringify(climbInfo),
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
+    const updatedJson = await updatedResponse.json();
+  };
+
+  edit = () => {};
 
   render() {
     return (
