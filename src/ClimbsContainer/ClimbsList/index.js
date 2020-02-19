@@ -11,6 +11,8 @@ const ClimbList = props => {
             <React.Fragment key={climb.id}>
               <ClimbCard
                 showClimb={props.showClimb}
+                editClimb={props.editClimb}
+                username={props.username}
                 id={climb.id}
                 climb={climb}
               />

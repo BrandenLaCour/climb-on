@@ -21,7 +21,12 @@ class ClimbsContainer extends React.Component {
 
   render() {
     return (
-      <ClimbList showClimb={this.props.showClimb} climbs={this.state.climbs} />
+      <ClimbList
+        editClimb={this.props.editClimb}
+        showClimb={this.props.showClimb}
+        username={this.props.username}
+        climbs={this.state.climbs}
+      />
     );
   }
 }

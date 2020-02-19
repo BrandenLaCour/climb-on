@@ -100,6 +100,8 @@ class App extends Component {
     this.setState({ climb: climbInfo });
   };
 
+  editClimb = () => {};
+
   render() {
     return (
       <div>
@@ -171,25 +173,31 @@ class App extends Component {
                     path="/"
                     render={props => (
                       <ClimbsContainer
+                        editClimb={this.editClimb}
                         showClimb={this.showClimb}
+                        username={this.state.user}
                         page={this.state.page}
                       />
                     )}
                   />
-                  {this.state.climb !== null ? (
-                    <Route
-                      exact
-                      path="/showClimb"
-                      render={props => <ShowClimb climb={this.state.climb} />}
-                    />
-                  ) : (
-                    <Redirect to="/" />
-                  )}
+                  <Route
+                    exact
+                    path="/showClimb"
+                    render={props =>
+                      this.state.climb !== null ? (
+                        <ShowClimb climb={this.state.climb} />
+                      ) : (
+                        <Redirect to="/" />
+                      )
+                    }
+                  />
+                  }
                   <Route
                     exact
                     path="/addClimb"
                     render={props => (
                       <ClimbForm
+                        climb={this.state.climb}
                         createClimb={this.createClimb}
                         updateClimb={this.updateClimb}
                         formType={this.state.page}
