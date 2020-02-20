@@ -20,7 +20,7 @@ class App extends Component {
       username: "",
       userId: "",
       page: "home",
-      climbToBeEdited: -1,
+      climbToBeEdited: {},
       climb: null,
       climbs: []
     };
@@ -45,12 +45,6 @@ class App extends Component {
   handlePageChoice = page => {
     this.setState({ page: page });
   };
-
-  componentDidUpdate() {
-    if (this.state.climb !== null && this.state.page !== "editClimb") {
-      this.setState({ climb: null });
-    }
-  }
 
   register = async userInfo => {
     try {
@@ -198,7 +192,7 @@ class App extends Component {
   };
 
   editClimb = climbInfo => {
-    this.setState({ climb: climbInfo, page: "editClimb" });
+    this.setState({ climbToBeEdited: climbInfo, page: "editClimb" });
   };
 
   render() {
@@ -314,7 +308,7 @@ class App extends Component {
                     path="/addClimb"
                     render={props => (
                       <ClimbForm
-                        climb={this.state.climb}
+                        climb={this.state.climbToBeEdited}
                         createClimb={this.createClimb}
                         formType={this.state.page}
                         page={this.state.page}
@@ -336,7 +330,7 @@ class App extends Component {
                     path="/editClimb"
                     render={props => (
                       <ClimbForm
-                        climb={this.state.climb}
+                        climb={this.state.climbToBeEdited}
                         createClimb={this.createClimb}
                         updateClimb={this.updateClimb}
                         formType={this.state.page}

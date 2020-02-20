@@ -11,7 +11,7 @@ const UserProfile = props => {
     <React.Fragment>
       <div className="climb-container">
         <div>
-          <Card style={{ width: "550px" }}>
+          <Card style={{ width: "330px" }}>
             <Image src={props.user.picture} wrapped ui={false} />
             <Card.Content>
               <Card.Header>{props.user.username}</Card.Header>
@@ -21,9 +21,9 @@ const UserProfile = props => {
           {climbs.length > 0
             ? climbs.map(climb => {
                 return (
-                  <Card style={{ width: "250px" }}>
+                  <Card style={{ width: "330px", padding: "10px" }}>
                     <Card.Content>
-                      <Image floated="right" size="mini" src={climb.picture} />
+                      <Image floated="right" size="small" src={climb.picture} />
                       <Card.Header>{climb.name}</Card.Header>
                       <Card.Meta>{climb.location}</Card.Meta>
                       <Card.Description>

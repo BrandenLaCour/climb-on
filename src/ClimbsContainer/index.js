@@ -4,6 +4,7 @@ import ClimbList from "./ClimbsList";
 const ClimbsContainer = props => {
   return (
     <ClimbList
+      page={props.page}
       deleteClimb={props.deleteClimb}
       editClimb={props.editClimb}
       showClimb={props.showClimb}

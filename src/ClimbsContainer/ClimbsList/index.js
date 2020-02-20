@@ -3,9 +3,13 @@ import ClimbCard from "./ClimbCard";
 import "./index.css";
 
 const ClimbList = props => {
+  console.log(props.page);
   return (
     <div className="content-container">
       <div className="content">
+        <h2 className="title">
+          {props.page === "myClimbs" ? "My Climbs" : ""}
+        </h2>
         {props.climbs.length > 0 ? (
           props.climbs.map(climb => {
             return (
