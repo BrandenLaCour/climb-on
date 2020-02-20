@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./index.css";
 
-
 const NavContainer = props => {
   return (
     <div
@@ -42,9 +41,16 @@ const NavContainer = props => {
         aria-current="true"
         aria-disabled="false"
       ></div>
+      {props.username === "" ? (
+        <div
+          className="space-4"
+          aria-current="true"
+          aria-disabled="false"
+        ></div>
+      ) : null}
       {props.username ? (
         <>
-          <Link
+          <div
             aria-current="false"
             aria-disabled="false"
             aria-label="pageItem"
@@ -52,23 +58,23 @@ const NavContainer = props => {
             className={`item ${
               props.username.length > 12 ? "user-link-large" : "user-link"
             }`}
-            to="/profile"
-            onClick={() => props.handlePageChoice("profile")}
           >
             {props.username}
-          </Link>
+          </div>
 
-          <Link
-            aria-current="false"
-            aria-disabled="false"
-            aria-label="First item"
-            type="firstItem"
-            className="item"
-            to="/addClimb"
-            onClick={() => props.handlePageChoice("addClimb")}
-          >
-            Add Climb
-          </Link>
+          {
+            <Link
+              aria-current="false"
+              aria-disabled="false"
+              aria-label="First item"
+              type="firstItem"
+              className={"item"}
+              to="/addClimb"
+              onClick={() => props.handlePageChoice("addClimb")}
+            >
+              Add Climb
+            </Link>
+          }
         </>
       ) : (
         <div

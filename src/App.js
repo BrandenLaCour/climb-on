@@ -37,7 +37,7 @@ class App extends Component {
       process.env.REACT_APP_API_URI + "/api/v1/climbs/all"
     );
     const { data } = await climbsResponse.json();
-    const reversed = data.reverse();
+    data.reverse();
     //reverse to have most recent climbs show up
     this.setState({ climbs: data });
   }
@@ -167,11 +167,9 @@ class App extends Component {
       );
       const updatedJson = await updatedResponse.json();
       const climbs = this.state.climbs;
-      const indexOfClimb = climbs.findIndex(climb => climb.id == climbInfo.id);
+      const indexOfClimb = climbs.findIndex(climb => climb.id === climbInfo.id);
       climbs.splice(indexOfClimb, 1, updatedJson.data);
       this.setState({ climbs: climbs });
-      console.log("edit ran");
-      console.log(updatedJson);
     } catch (err) {
       console.error(err);
     }
@@ -187,6 +185,7 @@ class App extends Component {
         }
       );
       const deleteJson = await deleteResponse.json();
+      console.log(deleteJson);
       const climbs = this.state.climbs;
       const indexOfClimb = climbs.findIndex(climb => climb.id === climbId);
       climbs.splice(indexOfClimb, 1);

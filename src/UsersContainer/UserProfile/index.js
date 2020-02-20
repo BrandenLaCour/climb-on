@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Image } from "semantic-ui-react";
 import "./index.css";
 import { Link } from "react-router-dom";
-import ClimbCard from "../../ClimbsContainer/ClimbsList/ClimbCard";
 
 const UserProfile = props => {
   const climbs = props.climbs.filter(climb => climb.user.id === props.user.id);
@@ -21,6 +20,7 @@ const UserProfile = props => {
           {climbs.length > 0
             ? climbs.map(climb => {
                 return (
+                  //maybe refactor and use climbcard here
                   <Card style={{ width: "330px", padding: "10px" }}>
                     <Card.Content>
                       <Image floated="right" size="small" src={climb.picture} />
