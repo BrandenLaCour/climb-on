@@ -20,7 +20,7 @@ class UsersContainer extends React.Component {
     this.setState({ users: usersJson.data });
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     if (this.state.profileView === true) {
       this.setState({ profileView: false });
     }

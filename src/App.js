@@ -20,7 +20,7 @@ class App extends Component {
       username: "",
       userId: "",
       page: "home",
-      climbToBeEdited: {},
+      climbToBeEdited: null,
       climb: null,
       climbs: []
     };
@@ -40,6 +40,15 @@ class App extends Component {
     const reversed = data.reverse();
     //reverse to have most recent climbs show up
     this.setState({ climbs: data });
+  }
+
+  componentDidUpdate() {
+    if (
+      this.state.climbToBeEdited !== null &&
+      this.state.page !== "editClimb"
+    ) {
+      this.setState({ climbToBeEdited: null });
+    }
   }
 
   handlePageChoice = page => {

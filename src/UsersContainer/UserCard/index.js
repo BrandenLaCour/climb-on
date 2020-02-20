@@ -12,7 +12,7 @@ const UserCard = props => {
           <Card.Header>{props.user.username}</Card.Header>
           <Card.Meta>{props.user.city}</Card.Meta>
           <Card.Description>
-            climbs posted: {climbs.length}{" "}
+            climbs logged: {climbs.length}{" "}
             <span
               onClick={() => props.handleProfileView(props.user)}
               className="link"
