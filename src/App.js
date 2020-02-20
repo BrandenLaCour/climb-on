@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: "",
+      userId: "",
       page: "home",
       climbToBeEdited: -1,
       climb: null,
@@ -60,7 +61,10 @@ class App extends Component {
       const registerJson = await registerResponse.json();
       console.log(registerJson);
       if (registerJson.message !== "username or email already exists") {
-        this.setState({ username: registerJson.data.username });
+        this.setState({
+          username: registerJson.data.username,
+          userId: registerJson.data.id
+        });
       } else {
         console.log("username or email already exists");
       }
@@ -84,7 +88,10 @@ class App extends Component {
       );
       const loginJson = await loginResponse.json();
       if (loginJson.message !== "username or password incorrect") {
-        this.setState({ username: loginJson.data.username });
+        this.setState({
+          username: loginJson.data.username,
+          userId: loginJson.data.id
+        });
       } else {
         console.log("username or password incorrect");
       }
@@ -100,7 +107,7 @@ class App extends Component {
       );
       const logoutJson = await logoutResponse.json();
       console.log(logoutJson);
-      this.setState({ username: "" });
+      this.setState({ username: "", userId: "" });
     } catch (err) {
       console.error(err);
     }
@@ -124,7 +131,7 @@ class App extends Component {
 
       const climbs = this.state.climbs;
       climbInfo.user = createdJson.data.user.id;
-      climbs.unshift(climbInfo);
+      climbs.unshift(createdJson.data);
       this.setState({ climbs: climbs });
     } catch (err) {
       console.error(err);
@@ -151,7 +158,7 @@ class App extends Component {
       const updatedJson = await updatedResponse.json();
       const climbs = this.state.climbs;
       const indexOfClimb = climbs.findIndex(climb => climb.id == climbInfo.id);
-      climbs.splice(indexOfClimb, 1, climbInfo);
+      climbs.splice(indexOfClimb, 1, updatedJson.data);
       this.setState({ climbs: climbs });
       console.log("edit ran");
       console.log(updatedJson);
@@ -173,7 +180,6 @@ class App extends Component {
       const climbs = this.state.climbs;
       const indexOfClimb = climbs.findIndex(climb => climb.id === climbId);
       climbs.splice(indexOfClimb, 1);
-      console.log(deleteJson);
       this.setState({ climbs: climbs });
     } catch (err) {
       console.error(err);
@@ -261,6 +267,22 @@ class App extends Component {
                       <ClimbsContainer
                         deleteClimb={this.deleteClimb}
                         climbs={this.state.climbs}
+                        editClimb={this.editClimb}
+                        showClimb={this.showClimb}
+                        username={this.state.username}
+                        page={this.state.page}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/myClimbs"
+                    render={props => (
+                      <ClimbsContainer
+                        deleteClimb={this.deleteClimb}
+                        climbs={this.state.climbs.filter(
+                          climb => climb.user.id === this.state.userId
+                        )}
                         editClimb={this.editClimb}
                         showClimb={this.showClimb}
                         username={this.state.username}
