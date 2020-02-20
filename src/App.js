@@ -228,13 +228,10 @@ class App extends Component {
                           username={this.state.username}
                           page={this.state.page}
                         />
+                      ) : this.state.username !== "" ? (
+                        <Redirect to="addClimb" />
                       ) : (
-                        <AuthForm
-                          handlePageChoice={this.handlePageChoice}
-                          formType={this.state.page}
-                          register={this.register}
-                          login={this.login}
-                        />
+                        <Redirect to="login" />
                       )
                     }
                   />
@@ -279,6 +276,8 @@ class App extends Component {
                     render={props =>
                       this.state.username === "" ? (
                         <AuthForm
+                          climbs={this.state.climbs}
+                          username={this.state.username}
                           handlePageChoice={this.handlePageChoice}
                           formType={this.state.page}
                           register={this.register}

@@ -1,5 +1,6 @@
 import React from "react";
-import { Form, Segment, Button, Select } from "semantic-ui-react";
+import { Form, Segment, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 class AuthForm extends React.Component {
@@ -120,28 +121,9 @@ class AuthForm extends React.Component {
                 </Form.Field>
 
                 <div className="submit">
-                  <Button>Submit</Button>
-                </div>
-                <div className="form-subtitle">
-                  <small>
-                    {this.props.formType === "register"
-                      ? "Already Registered? "
-                      : "Need to Register? "}
-                    <span
-                      className="link"
-                      onClick={() =>
-                        this.props.handlePageChoice(
-                          this.props.formType === "register"
-                            ? "login"
-                            : "register"
-                        )
-                      }
-                    >
-                      {this.props.formType === "register"
-                        ? "Log In"
-                        : "Register"}
-                    </span>
-                  </small>
+                  <Link to="/">
+                    <Button>Submit</Button>
+                  </Link>
                 </div>
               </Segment>
             </Form>

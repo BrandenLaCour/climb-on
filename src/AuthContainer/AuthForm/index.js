@@ -28,6 +28,12 @@ class AuthForm extends React.Component {
     }
   };
   render() {
+    // if (this.props.username.length > 0 && this.props.climbs.length > 0) {
+    //   return <Redirect to="/" />;
+    // } else {
+    //   if (this.props.username.length > 0) return <Redirect to="/addClimb" />;
+    // }
+    //above is a possible way to do routing if needed if user isn't logged in etc.
     return (
       <>
         <div className="form-container">
