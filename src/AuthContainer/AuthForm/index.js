@@ -37,7 +37,7 @@ class AuthForm extends React.Component {
     return (
       <>
         <div className="form-container">
-          <div>
+          <div className="form-div">
             <Form onSubmit={this.handleSubmit} className="form" size="small">
               <Segment raised>
                 <Form.Field>

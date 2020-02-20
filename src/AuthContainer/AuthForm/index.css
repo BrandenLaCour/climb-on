@@ -4,7 +4,12 @@
   margin-top: 60px;
 }
 
+.form-div {
+  height: 100vh;
+}
+
 .form-container {
+  height: "100vh";
   display: flex;
   justify-content: center;
 }

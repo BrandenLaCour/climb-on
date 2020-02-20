@@ -1,6 +1,7 @@
 import React from "react";
 import UserCard from "./UserCard";
 import UserProfile from "./UserProfile";
+import "./index.css";
 
 class UsersContainer extends React.Component {
   constructor() {
@@ -20,7 +21,7 @@ class UsersContainer extends React.Component {
     this.setState({ users: usersJson.data });
   }
 
-  componentDidUpdate() {
+  UNSAFE_componentWillUpdate() {
     if (this.state.profileView === true) {
       this.setState({ profileView: false });
     }
@@ -46,6 +47,7 @@ class UsersContainer extends React.Component {
               this.state.users.map(user => {
                 return (
                   <UserCard
+                    key={user.id}
                     handleProfileView={this.handleProfileView}
                     climbs={this.props.climbs}
                     user={user}

@@ -27,14 +27,14 @@ const NavContainer = props => {
         aria-current="true"
         aria-disabled="false"
       ></div>{" "}
-      <input
+      <div
         aria-current="false"
         aria-disabled="false"
         aria-label="First item"
         type="firstItem"
         className="search item"
         placeholder="Enter Climb"
-      />
+      ></div>
       {/* above will eventually need its own component for search */}
       <div
         className={props.username.length > 8 ? `space-large` : "space"}

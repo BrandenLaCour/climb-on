@@ -20,28 +20,34 @@ const UserProfile = props => {
           {climbs.length > 0
             ? climbs.map(climb => {
                 return (
-                  //maybe refactor and use climbcard here
-                  <Card style={{ width: "330px", padding: "10px" }}>
-                    <Card.Content>
-                      <Image floated="right" size="small" src={climb.picture} />
-                      <Card.Header>{climb.name}</Card.Header>
-                      <Card.Meta>{climb.location}</Card.Meta>
-                      <Card.Description>
-                        <Link
-                          onClick={() => props.showClimb(climb)}
-                          to="/showClimb"
-                          className="link"
-                          style={{
-                            marginLeft: "40px",
-                            color: "blue",
-                            textDecoration: "underline"
-                          }}
-                        >
-                          More Info
-                        </Link>
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
+                  <React.Fragment key={climb.id}>
+                    {/* //maybe refactor and use climbcard here */}
+                    <Card style={{ width: "330px", padding: "10px" }}>
+                      <Card.Content>
+                        <Image
+                          floated="right"
+                          size="small"
+                          src={climb.picture}
+                        />
+                        <Card.Header>{climb.name}</Card.Header>
+                        <Card.Meta>{climb.location}</Card.Meta>
+                        <Card.Description>
+                          <Link
+                            onClick={() => props.showClimb(climb)}
+                            to="/showClimb"
+                            className="link"
+                            style={{
+                              marginLeft: "40px",
+                              color: "blue",
+                              textDecoration: "underline"
+                            }}
+                          >
+                            More Info
+                          </Link>
+                        </Card.Description>
+                      </Card.Content>
+                    </Card>
+                  </React.Fragment>
                 );
               })
             : null}

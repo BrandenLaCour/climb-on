@@ -3,7 +3,6 @@ import ClimbCard from "./ClimbCard";
 import "./index.css";
 
 const ClimbList = props => {
-  console.log(props.page);
   return (
     <div className="content-container">
       <div className="content">

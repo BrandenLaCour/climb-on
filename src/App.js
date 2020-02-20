@@ -238,15 +238,17 @@ class App extends Component {
                 </Menu.Item>
               ) : null}
 
-              <Link
-                onClick={() => this.handlePageChoice("myClimbs")}
-                to="/myClimbs"
-              >
-                <Menu.Item>
-                  <Icon name="chart line" />
-                  My Climbs
-                </Menu.Item>
-              </Link>
+              {this.state.username !== "" ? (
+                <Link
+                  onClick={() => this.handlePageChoice("myClimbs")}
+                  to="/myClimbs"
+                >
+                  <Menu.Item>
+                    <Icon name="chart line" />
+                    My Climbs
+                  </Menu.Item>
+                </Link>
+              ) : null}
               <Link onClick={() => this.handlePageChoice("users")} to="/users">
                 <Menu.Item>
                   <Icon name="address book outline" />
@@ -256,13 +258,7 @@ class App extends Component {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <Segment
-                style={
-                  this.state.page !== ("home" || "users" || "my climbs")
-                    ? { height: "100vh" }
-                    : { height: "100%" }
-                }
-              >
+              <Segment style={{ height: "100%" }}>
                 <NavContainer
                   username={this.state.username}
                   handlePageChoice={this.handlePageChoice}
