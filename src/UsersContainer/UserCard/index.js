@@ -2,7 +2,8 @@ import React from "react";
 import { Card, Image } from "semantic-ui-react";
 
 const UserCard = props => {
-  const climbs = props.climbs.filter(climb => climb.id === props.user.id);
+  const climbs = props.climbs.filter(climb => climb.user.id === props.user.id);
+
   return (
     <div>
       <Card style={{ width: "250px" }}>
