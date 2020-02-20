@@ -25,8 +25,8 @@ const ShowClimb = props => {
               <Card.Meta>
                 {" "}
                 Rating:{" "}
-                {stars.map(star => {
-                  return <Icon name={star} color="blue" />;
+                {stars.map((star, i) => {
+                  return <Icon key={i} name={star} color="blue" />;
                 })}
               </Card.Meta>
             </Card.Content>

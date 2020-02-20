@@ -22,8 +22,8 @@ const ClimbCard = props => {
           <Card.Meta>
             {" "}
             Rating:{" "}
-            {stars.map(star => {
-              return <Icon name={star} color="blue" />;
+            {stars.map((star, i) => {
+              return <Icon key={i} name={star} color="blue" />;
             })}{" "}
             <Link onClick={() => props.showClimb(props.climb)} to="/showClimb">
               More Info
