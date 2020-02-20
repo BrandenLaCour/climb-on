@@ -57,8 +57,13 @@ class App extends Component {
           }
         }
       );
-      const { data } = await registerResponse.json();
-      this.setState({ username: data.username });
+      const registerJson = await registerResponse.json();
+      console.log(registerJson);
+      if (registerJson.message !== "username or email already exists") {
+        this.setState({ username: registerJson.data.username });
+      } else {
+        console.log("username or email already exists");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -80,6 +85,8 @@ class App extends Component {
       const loginJson = await loginResponse.json();
       if (loginJson.message !== "username or password incorrect") {
         this.setState({ username: loginJson.data.username });
+      } else {
+        console.log("username or password incorrect");
       }
     } catch (err) {
       console.error(err);

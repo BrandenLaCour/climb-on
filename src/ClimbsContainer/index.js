@@ -4,9 +4,9 @@ import ClimbList from "./ClimbsList";
 const ClimbsContainer = props => {
   return (
     <ClimbList
-      editClimb={this.props.editClimb}
-      showClimb={this.props.showClimb}
-      username={this.props.username}
+      editClimb={props.editClimb}
+      showClimb={props.showClimb}
+      username={props.username}
       climbs={props.climbs}
     />
   );
