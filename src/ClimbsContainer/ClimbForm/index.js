@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Segment, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 import "./index.css";
 
 class AuthForm extends React.Component {
@@ -13,7 +14,8 @@ class AuthForm extends React.Component {
       date: "",
       picture: "",
       thoughts: "",
-      rating: 0
+      rating: 0,
+      redirect: false
     };
   }
 
@@ -29,17 +31,23 @@ class AuthForm extends React.Component {
     e.preventDefault();
 
     if (this.props.formType === "editClimb") {
+      const climb = this.state;
+      climb.rating = parseInt(climb.rating);
       this.props.updateClimb(this.state);
     } else {
       this.props.createClimb(this.state);
     }
+    this.setState({ redirect: true });
   };
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="/login" />;
+    }
     return (
       <>
-        <div className="form-container">
+        <div onSubmit={this.handleSubmit} className="form-container">
           <div>
-            <Form onSubmit={this.handleSubmit} className="form" size="small">
+            <Form className="form" size="small">
               <Segment raised>
                 <Form.Field>
                   <span className="title">
@@ -121,9 +129,7 @@ class AuthForm extends React.Component {
                 </Form.Field>
 
                 <div className="submit">
-                  <Link to="/">
-                    <Button>Submit</Button>
-                  </Link>
+                  <Button>Submit</Button>
                 </div>
               </Segment>
             </Form>

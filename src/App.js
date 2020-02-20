@@ -107,6 +107,7 @@ class App extends Component {
   };
 
   createClimb = async climbInfo => {
+    delete climbInfo.redirect;
     try {
       const createdResponse = await fetch(
         process.env.REACT_APP_API_URI + "/api/v1/climbs/",
@@ -120,12 +121,21 @@ class App extends Component {
         }
       );
       const createdJson = await createdResponse.json();
+
+      const climbs = this.state.climbs;
+      climbInfo.user = createdJson.data.user.id;
+      climbs.unshift(climbInfo);
+      this.setState({ climbs: climbs });
     } catch (err) {
       console.error(err);
     }
   };
 
   updateClimb = async climbInfo => {
+    delete climbInfo.redirect;
+    const userId = climbInfo.user.id;
+    delete climbInfo.user;
+    climbInfo.user = userId;
     try {
       const updatedResponse = await fetch(
         process.env.REACT_APP_API_URI + "/api/v1/climbs/" + climbInfo.id,
@@ -139,6 +149,32 @@ class App extends Component {
         }
       );
       const updatedJson = await updatedResponse.json();
+      const climbs = this.state.climbs;
+      const indexOfClimb = climbs.findIndex(climb => climb.id == climbInfo.id);
+      climbs.splice(indexOfClimb, 1, climbInfo);
+      this.setState({ climbs: climbs });
+      console.log("edit ran");
+      console.log(updatedJson);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  deleteClimb = async climbId => {
+    try {
+      const deleteResponse = await fetch(
+        process.env.REACT_APP_API_URI + "/api/v1/climbs/" + climbId,
+        {
+          credentials: "include",
+          method: "DELETE"
+        }
+      );
+      const deleteJson = await deleteResponse.json();
+      const climbs = this.state.climbs;
+      const indexOfClimb = climbs.findIndex(climb => climb.id === climbId);
+      climbs.splice(indexOfClimb, 1);
+      console.log(deleteJson);
+      this.setState({ climbs: climbs });
     } catch (err) {
       console.error(err);
     }
@@ -180,14 +216,16 @@ class App extends Component {
                 </Link>
               ) : null}
 
-              <Menu.Item onClick={this.logout}>
-                <Icon name="sign-out" />
-                Log Out
-              </Menu.Item>
+              {this.state.username !== "" ? (
+                <Menu.Item onClick={this.logout}>
+                  <Icon name="sign-out" />
+                  Log Out
+                </Menu.Item>
+              ) : null}
 
               <Link
                 onClick={() => this.handlePageChoice("myClimbs")}
-                to="myClimbs"
+                to="/myClimbs"
               >
                 <Menu.Item>
                   <Icon name="chart line" />
@@ -219,21 +257,16 @@ class App extends Component {
                   <Route
                     exact
                     path="/"
-                    render={props =>
-                      this.state.climbs.length > 0 ? (
-                        <ClimbsContainer
-                          climbs={this.state.climbs}
-                          editClimb={this.editClimb}
-                          showClimb={this.showClimb}
-                          username={this.state.username}
-                          page={this.state.page}
-                        />
-                      ) : this.state.username !== "" ? (
-                        <Redirect to="addClimb" />
-                      ) : (
-                        <Redirect to="login" />
-                      )
-                    }
+                    render={props => (
+                      <ClimbsContainer
+                        deleteClimb={this.deleteClimb}
+                        climbs={this.state.climbs}
+                        editClimb={this.editClimb}
+                        showClimb={this.showClimb}
+                        username={this.state.username}
+                        page={this.state.page}
+                      />
+                    )}
                   />
                   <Route
                     exact
@@ -255,6 +288,7 @@ class App extends Component {
                         climb={this.state.climb}
                         createClimb={this.createClimb}
                         formType={this.state.page}
+                        page={this.state.page}
                       />
                     )}
                   />
@@ -267,6 +301,7 @@ class App extends Component {
                         createClimb={this.createClimb}
                         updateClimb={this.updateClimb}
                         formType={this.state.page}
+                        page={this.state.page}
                       />
                     )}
                   />

@@ -32,7 +32,20 @@ const ClimbCard = props => {
 
           <Link to="editClimb" onClick={() => props.editClimb(props.climb)}>
             {props.username === props.climb.user.username ? (
-              <Button>Edit Climb</Button>
+              <div>
+                {" "}
+                <Button>Edit Climb</Button>
+              </div>
+            ) : (
+              ""
+            )}
+          </Link>
+          <Link to="/" onClick={() => props.deleteClimb(props.climb.id)}>
+            {props.username === props.climb.user.username ? (
+              <div>
+                {" "}
+                <Button>Delete Climb</Button>
+              </div>
             ) : (
               ""
             )}
