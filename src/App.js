@@ -46,6 +46,12 @@ class App extends Component {
     this.setState({ page: page });
   };
 
+  componentDidUpdate() {
+    if (this.state.climb !== null && this.state.page !== "editClimb") {
+      this.setState({ climb: null });
+    }
+  }
+
   register = async userInfo => {
     try {
       const registerResponse = await fetch(
