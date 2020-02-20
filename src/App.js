@@ -7,6 +7,7 @@ import NavContainer from "./NavContainer";
 import AuthForm from "./AuthContainer/AuthForm";
 import ClimbForm from "./ClimbsContainer/ClimbForm";
 import ShowClimb from "./ClimbsContainer/ShowClimb";
+import UsersContainer from "./UsersContainer";
 // import SidebarContainer from "./SidebarContainer";
 import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import "./App.css";
@@ -238,7 +239,7 @@ class App extends Component {
                   My Climbs
                 </Menu.Item>
               </Link>
-              <Link onClick={() => this.handlePageChoice("users")} to="/Users">
+              <Link onClick={() => this.handlePageChoice("users")} to="/users">
                 <Menu.Item>
                   <Icon name="address book outline" />
                   Users
@@ -312,6 +313,13 @@ class App extends Component {
                         formType={this.state.page}
                         page={this.state.page}
                       />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/users"
+                    render={props => (
+                      <UsersContainer climbs={this.state.climbs} />
                     )}
                   />
                   <Route
