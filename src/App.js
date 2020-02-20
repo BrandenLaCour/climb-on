@@ -16,7 +16,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      username: "brandenlacour@gma",
+      username: "",
       page: "home",
       climbToBeEdited: -1,
       climb: null
@@ -64,6 +64,15 @@ class App extends Component {
     const { data } = await loginResponse.json();
 
     this.setState({ username: data.username });
+  };
+
+  logout = async () => {
+    const logoutResponse = await fetch(
+      process.env.REACT_APP_API_URI + "/api/v1/users/logout"
+    );
+    const logoutJson = await logoutResponse.json();
+    console.log(logoutJson);
+    this.setState({ username: "" });
   };
 
   createClimb = async climbInfo => {
@@ -121,21 +130,19 @@ class App extends Component {
                   Home
                 </Menu.Item>
               </Link>
-              <Link onClick={() => this.handlePageChoice("login")} to="login">
-                <Menu.Item>
-                  <Icon name="sign-in" />
-                  Login
-                </Menu.Item>
-              </Link>
-              <Link
-                onClick={() => this.handlePageChoice("logout")}
-                to="/logout"
-              >
-                <Menu.Item>
-                  <Icon name="sign-out" />
-                  Log Out
-                </Menu.Item>
-              </Link>
+              {this.state.username === "" ? (
+                <Link onClick={() => this.handlePageChoice("login")} to="login">
+                  <Menu.Item>
+                    <Icon name="sign-in" />
+                    Login
+                  </Menu.Item>
+                </Link>
+              ) : null}
+
+              <Menu.Item onClick={this.logout}>
+                <Icon name="sign-out" />
+                Log Out
+              </Menu.Item>
 
               <Link
                 onClick={() => this.handlePageChoice("myClimbs")}
@@ -207,14 +214,18 @@ class App extends Component {
                   <Route
                     exact
                     path="/login"
-                    render={props => (
-                      <AuthForm
-                        handlePageChoice={this.handlePageChoice}
-                        formType={this.state.page}
-                        register={this.register}
-                        login={this.login}
-                      />
-                    )}
+                    render={props =>
+                      this.state.username === "" ? (
+                        <AuthForm
+                          handlePageChoice={this.handlePageChoice}
+                          formType={this.state.page}
+                          register={this.register}
+                          login={this.login}
+                        />
+                      ) : (
+                        <Redirect to="/" />
+                      )
+                    }
                   />
                 </Switch>
               </Segment>
