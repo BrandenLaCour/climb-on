@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 const UserCard = props => {
   const climbs = props.climbs.filter(climb => climb.id === props.user.id);
@@ -13,7 +12,17 @@ const UserCard = props => {
           <Card.Meta>{props.user.city}</Card.Meta>
           <Card.Description>
             climbs posted: {climbs.length}{" "}
-            <Link style={{ marginLeft: "40px" }}>More Info</Link>
+            <span
+              onClick={() => props.handleProfileView(props.user)}
+              className="link"
+              style={{
+                marginLeft: "40px",
+                color: "blue",
+                textDecoration: "underline"
+              }}
+            >
+              More Info
+            </span>
           </Card.Description>
         </Card.Content>
       </Card>

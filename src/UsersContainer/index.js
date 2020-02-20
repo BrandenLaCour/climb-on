@@ -1,11 +1,14 @@
 import React from "react";
 import UserCard from "./UserCard";
+import UserProfile from "./UserProfile";
 
 class UsersContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
+      profileView: false,
+      user: {}
     };
   }
 
@@ -16,14 +19,40 @@ class UsersContainer extends React.Component {
     const usersJson = await usersResponse.json();
     this.setState({ users: usersJson.data });
   }
+
+  componentWillUpdate() {
+    if (this.state.profileView === true) {
+      this.setState({ profileView: false });
+    }
+  }
+
+  handleProfileView = userInfo => {
+    const profileView = !this.state.profileView;
+
+    this.setState({ profileView: profileView, user: userInfo });
+  };
   render() {
     return (
       <>
         <div className="content-container">
           <div>
-            {this.state.users.map(user => {
-              return <UserCard climbs={this.props.climbs} user={user} />;
-            })}
+            {this.state.profileView ? (
+              <UserProfile
+                showClimb={this.props.showClimb}
+                user={this.state.user}
+                climbs={this.props.climbs}
+              />
+            ) : (
+              this.state.users.map(user => {
+                return (
+                  <UserCard
+                    handleProfileView={this.handleProfileView}
+                    climbs={this.props.climbs}
+                    user={user}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </>

@@ -319,7 +319,10 @@ class App extends Component {
                     exact
                     path="/users"
                     render={props => (
-                      <UsersContainer climbs={this.state.climbs} />
+                      <UsersContainer
+                        showClimb={this.showClimb}
+                        climbs={this.state.climbs}
+                      />
                     )}
                   />
                   <Route
