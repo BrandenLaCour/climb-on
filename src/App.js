@@ -16,7 +16,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      username: "",
+      username: "brandenlacour@gmail.com",
       page: "home",
       climbToBeEdited: -1,
       climb: null
@@ -109,7 +109,9 @@ class App extends Component {
     this.setState({ climb: climbInfo });
   };
 
-  editClimb = () => {};
+  editClimb = climbInfo => {
+    this.setState({ climb: climbInfo, page: "editClimb" });
+  };
 
   render() {
     return (
@@ -182,7 +184,7 @@ class App extends Component {
                       <ClimbsContainer
                         editClimb={this.editClimb}
                         showClimb={this.showClimb}
-                        username={this.state.user}
+                        username={this.state.username}
                         page={this.state.page}
                       />
                     )}
@@ -202,6 +204,17 @@ class App extends Component {
                   <Route
                     exact
                     path="/addClimb"
+                    render={props => (
+                      <ClimbForm
+                        climb={this.state.climb}
+                        createClimb={this.createClimb}
+                        formType={this.state.page}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/editClimb"
                     render={props => (
                       <ClimbForm
                         climb={this.state.climb}

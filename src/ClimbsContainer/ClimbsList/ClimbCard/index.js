@@ -30,7 +30,7 @@ const ClimbCard = props => {
             </Link>
           </Card.Meta>
 
-          <Link editClimb={props.editClimb}>
+          <Link to="editClimb" onClick={() => props.editClimb(props.climb)}>
             {props.username === props.climb.user.username ? (
               <Button>Edit Climb</Button>
             ) : (

@@ -16,6 +16,10 @@ class AuthForm extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.climb !== null) this.setState({ ...this.props.climb });
+  }
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -30,7 +34,6 @@ class AuthForm extends React.Component {
     }
   };
   render() {
-    console.log(this.state);
     return (
       <>
         <div className="form-container">
