@@ -73,7 +73,8 @@ class App extends Component {
       if (registerJson.message !== "username or email already exists") {
         this.setState({
           username: registerJson.data.username,
-          userId: registerJson.data.id
+          userId: registerJson.data.id,
+          page: "home"
         });
       } else {
         console.log("username or email already exists");
@@ -100,7 +101,8 @@ class App extends Component {
       if (loginJson.message !== "username or password incorrect") {
         this.setState({
           username: loginJson.data.username,
-          userId: loginJson.data.id
+          userId: loginJson.data.id,
+          page: "home"
         });
       } else {
         console.log("username or password incorrect");
@@ -258,7 +260,13 @@ class App extends Component {
             </Sidebar>
 
             <Sidebar.Pusher>
-              <Segment style={{ height: "100%" }}>
+              <Segment
+                style={
+                  this.state.page === "home"
+                    ? { height: this.state.climbs.length * 400 }
+                    : { height: "98vh" }
+                }
+              >
                 <NavContainer
                   username={this.state.username}
                   handlePageChoice={this.handlePageChoice}

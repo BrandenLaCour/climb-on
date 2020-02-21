@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Image, Icon, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import "./index.css";
 
 const ClimbCard = props => {
   const stars = [];
@@ -29,27 +30,27 @@ const ClimbCard = props => {
               More Info
             </Link>
           </Card.Meta>
-
-          <Link to="editClimb" onClick={() => props.editClimb(props.climb)}>
-            {props.username === props.climb.user.username ? (
-              <div>
-                {" "}
-                <Button>Edit Climb</Button>
-              </div>
-            ) : (
-              ""
-            )}
-          </Link>
-          <Link to="/" onClick={() => props.deleteClimb(props.climb.id)}>
-            {props.username === props.climb.user.username ? (
-              <div>
-                {" "}
-                <Button>Delete Climb</Button>
-              </div>
-            ) : (
-              ""
-            )}
-          </Link>
+          <div className="button-container">
+            <Link to="editClimb" onClick={() => props.editClimb(props.climb)}>
+              {props.username === props.climb.user.username ? (
+                <div>
+                  {" "}
+                  <Button>Edit Climb</Button>
+                </div>
+              ) : (
+                ""
+              )}
+            </Link>
+            <Link to="/" onClick={() => props.deleteClimb(props.climb.id)}>
+              {props.username === props.climb.user.username ? (
+                <div>
+                  <Button>Delete Climb</Button>
+                </div>
+              ) : (
+                ""
+              )}
+            </Link>
+          </div>
         </Card.Content>
       </Card>
     </React.Fragment>

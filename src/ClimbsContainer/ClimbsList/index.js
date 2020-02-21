@@ -5,7 +5,7 @@ import "./index.css";
 const ClimbList = props => {
   return (
     <div className="content-container">
-      <div className="content">
+      <div id="content">
         <h2 className="title">
           {props.page === "myClimbs" ? "My Climbs" : ""}
         </h2>
