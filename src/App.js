@@ -262,9 +262,9 @@ class App extends Component {
             <Sidebar.Pusher>
               <Segment
                 style={
-                  this.state.page === "home"
+                  this.state.page === "home" && this.state.climbs.length > 0
                     ? { height: this.state.climbs.length * 400 }
-                    : { height: "98vh" }
+                    : { height: "100%" }
                 }
               >
                 <NavContainer
